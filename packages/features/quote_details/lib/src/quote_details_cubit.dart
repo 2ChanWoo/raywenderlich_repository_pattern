@@ -69,6 +69,19 @@ class QuoteDetailsCubit extends Cubit<QuoteDetailsState> {
     );
   }
 
+  //TODO: 이게 더 낫지않음?
+  // void unfavoriteQuote() async {
+  //   await _executeQuoteUpdateOperation(
+  //     quoteRepository.unfavoriteQuote,
+  //   );
+  // }
+  //
+  // Future<void> _executeQuoteUpdateOperation(
+  //     Future<Quote> Function(int) updateQuote,
+  //     ) async {
+  //   try {
+  //     final updatedQuote = await updateQuote(quoteId);
+
   Future<void> _executeQuoteUpdateOperation(
     Future<Quote> Function() updateQuote,
   ) async {

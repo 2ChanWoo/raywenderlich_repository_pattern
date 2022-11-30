@@ -53,10 +53,10 @@ class QuoteDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StyledStatusBar.dark(
-      child: BlocConsumer<QuoteDetailsCubit, QuoteDetailsState>(
+      child: BlocConsumer<QuoteDetailsCubit, QuoteDetailsState>(  // consumer 는 BlocBuilder 와 BlocListner 를 합친 것과 같음.
         listener: (context, state) {
           final quoteUpdateError =
-              state is QuoteDetailsSuccess ? state.quoteUpdateError : null;
+              state is QuoteDetailsSuccess ? state.quoteUpdateError : null; //TODO: 웨 Success 인데 Error 로?? 디테일 나왔을경우만인건가?
           if (quoteUpdateError != null) {
             final snackBar =
                 quoteUpdateError is UserAuthenticationRequiredException
