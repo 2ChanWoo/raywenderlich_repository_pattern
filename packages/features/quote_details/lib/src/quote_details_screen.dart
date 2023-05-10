@@ -52,9 +52,12 @@ class QuoteDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("????????QuoteDetailsView???????????");
     return StyledStatusBar.dark(
       child: BlocConsumer<QuoteDetailsCubit, QuoteDetailsState>(  // consumer 는 BlocBuilder 와 BlocListner 를 합친 것과 같음.
         listener: (context, state) {
+          print("Detail BlocConsumer state: $state");
+          /// 아, Success 상태에서 뭔가 오류가 있을경우..?! Fail인건 Builder에서 처리되는거구..
           final quoteUpdateError =
               state is QuoteDetailsSuccess ? state.quoteUpdateError : null; //TODO: 웨 Success 인데 Error 로?? 디테일 나왔을경우만인건가?
           if (quoteUpdateError != null) {
@@ -73,10 +76,13 @@ class QuoteDetailsView extends StatelessWidget {
           }
         },
         builder: (context, state) {
+          print("Detail BlocConsumer Build");
           return WillPopScope(
             onWillPop: () async {
+              print("버근가.. 왜 시스템 버튼으로는 안나오지?");
               final displayedQuote =
                   state is QuoteDetailsSuccess ? state.quote : null;
+
               Navigator.of(context).pop(displayedQuote);
               return false;
             },

@@ -16,23 +16,32 @@ class ProfileMenuBloc extends Bloc<ProfileMenuEvent, ProfileMenuState> {
   }) : super(
           const ProfileMenuInProgress(),
         ) {
+    print("ProfileMenuBlocProfileMenuBlocProfileMenuBlocProfileMenuBloc");
     on<ProfileMenuStarted>(
       (_, emit) async {
+        print("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
         await emit.onEach(
           Rx.combineLatest2<User?, DarkModePreference, ProfileMenuLoaded>(
             userRepository.getUser(),
             userRepository.getDarkModePreference(),
-            (user, darkModePreference) => ProfileMenuLoaded(
-              darkModePreference: darkModePreference,
-              username: user?.username,
-            ),
+            (user, darkModePreference)
+            {
+              return ProfileMenuLoaded(
+                darkModePreference: darkModePreference,
+                username: user?.username,
+              );
+            },
           ),
           onData: emit,
         );
       },
-      transformer: (events, mapper) => events.flatMap(
-        mapper,
-      ),
+      transformer: (events, mapper)
+      {
+     //   print("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
+        return events.flatMap(
+          mapper,
+        );
+      },
     );
 
     on<ProfileMenuSignedOut>((_, emit) async {
@@ -52,6 +61,8 @@ class ProfileMenuBloc extends Bloc<ProfileMenuEvent, ProfileMenuState> {
         event.preference,
       );
     });
+
+    print("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT222");
 
     add(
       const ProfileMenuStarted(),

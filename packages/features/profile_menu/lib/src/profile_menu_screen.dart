@@ -62,6 +62,7 @@ class ProfileMenuView extends StatelessWidget {
         body: SafeArea(
           child: BlocBuilder<ProfileMenuBloc, ProfileMenuState>(
             builder: (context, state) {
+              print("ProfileMenuBloc BlocBuilder");
               if (state is ProfileMenuLoaded) {
                 final username = state.username;
                 return Column(

@@ -22,10 +22,14 @@ class QuoteListBloc extends Bloc<QuoteListEvent, QuoteListState> {
         ) {
     _registerEventsHandler();
 
-    _authChangesSubscription = userRepository.getUser().listen(
+    _authChangesSubscription = userRepository
+        //UserRepository 를 반환. 사용자 인증 상태를 모니터링.
+        .getUser()
+        .listen(
       (user) {
         _authenticatedUsername = user?.username;
 
+        // Bloc 자체 내부에서 이벤트를 추가? ㅇㅇ 맨 처음 리스트 fetch 하는 역할.
         add(
           const QuoteListUsernameObtained(),
         );
@@ -122,6 +126,7 @@ class QuoteListBloc extends Bloc<QuoteListEvent, QuoteListState> {
   }
 
   Future<void> _handleQuoteListUsernameObtained(Emitter emitter) {
+    print("_handleQuoteListUsernameObtained");
     emitter(
       QuoteListState(
         filter: state.filter,
@@ -321,7 +326,7 @@ class QuoteListBloc extends Bloc<QuoteListEvent, QuoteListState> {
     final isFilteringByFavorites =
         currentlyAppliedFilter is QuoteListFilterByFavorites;
     final isUserSignedIn = _authenticatedUsername != null;
-    if (isFilteringByFavorites && !isUserSignedIn) {
+    if (isFilteringByFavorites && !isUserSignedIn) {  // 비로그인 상태에서 필터링 걸면 아이템 없다는 위젯 반환.
       yield QuoteListState.noItemsFound(
         filter: currentlyAppliedFilter,
       );
@@ -365,6 +370,10 @@ class QuoteListBloc extends Bloc<QuoteListEvent, QuoteListState> {
           );
         }
 
+        // 새로고침 요청 중에 오류가 발생한 경우는,
+        // 이미 일부 항목(컨텐츠가 렌더링되어 있다)이 있다는 의미이므로
+        // 이러한 항목을 숨기고 전체 오류 화면 을 표시할 이유가 없다.
+        // >> 스낵바로 오류가 발생했다고 알리는 것이 더 좋은 UX
         if (isRefresh) {
           yield state.copyWithNewRefreshError(
             error,

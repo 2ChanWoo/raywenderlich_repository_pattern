@@ -52,6 +52,7 @@ class UserRepository {
         password,
       );
 
+      /// 주의! iOS 는 키체인에 저장되어서, 앱을 삭제해도 데이터가 남아있을 수 있다. https://github.com/mogol/flutter_secure_storage/issues/88
       await _secureStorage.upsertUserInfo(
         username: apiUser.username,
         email: apiUser.email,

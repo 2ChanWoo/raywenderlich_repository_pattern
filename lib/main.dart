@@ -134,6 +134,8 @@ class _WonderWordsState extends State<WonderWords> {
     return StreamBuilder<DarkModePreference>(
       stream: _userRepository.getDarkModePreference(),
       builder: (context, snapshot) {
+        print('ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ DarkMode Stream Build ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ');
+
         final darkModePreference = snapshot.data;
 
         return WonderTheme(

@@ -38,11 +38,15 @@ Map<String, PageBuilder> buildRoutingTable({
             routerDelegate.push(_PathConstants.signInPath);
           },
           onQuoteSelected: (id) {
+            print("@@@@@ @");
+
             final navigation = routerDelegate.push<Quote?>(
               _PathConstants.quoteDetailsPath(
                 quoteId: id,
               ),
             );
+            navigation.result.then((value) => print("@@@@@ $value"));
+
             return navigation.result;
           },
           remoteValueService: remoteValueService,

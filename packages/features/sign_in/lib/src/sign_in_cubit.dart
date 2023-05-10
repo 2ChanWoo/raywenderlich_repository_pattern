@@ -53,7 +53,7 @@ class SignInCubit extends Cubit<SignInState> {
     final previousPasswordState = previousScreenState.password;
     final shouldValidate = previousPasswordState.invalid;
     final newPasswordState = shouldValidate
-        ? Password.validated(
+        ? Password.validated( /// TODO: 한 번 유효성 검사 오류가 출력된 이후에만 문자가 변경될 때 마다 표시. >> 이 로직이 뭐?
             newValue,
           )
         : Password.unvalidated(

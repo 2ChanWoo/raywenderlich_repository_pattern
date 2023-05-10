@@ -32,6 +32,7 @@ class QuoteListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("QuoteListScreen build()");
     return BlocProvider<QuoteListBloc>(
       create: (_) => QuoteListBloc(
         quoteRepository: quoteRepository,
