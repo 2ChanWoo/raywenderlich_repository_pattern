@@ -46,6 +46,7 @@ class QuoteListBloc extends Bloc<QuoteListEvent, QuoteListState> {
     on<QuoteListEvent>(
       (event, emitter) async {
         if (event is QuoteListUsernameObtained) {
+          await Future.delayed(Duration(seconds: 3));
           await _handleQuoteListUsernameObtained(emitter);
         } else if (event is QuoteListFailedFetchRetried) {
           await _handleQuoteListFailedFetchRetried(emitter);
@@ -140,7 +141,7 @@ class QuoteListBloc extends Bloc<QuoteListEvent, QuoteListState> {
 
     return emitter.onEach<QuoteListState>(
       firstPageFetchStream,
-      onData: emitter,
+      onData: emitter, // firstPageFetchStream 가 완료되면, emitter(결과) 실행됨 (Emitter 클래스의 펑셔너블 메서드 call 실행)
     );
   }
 

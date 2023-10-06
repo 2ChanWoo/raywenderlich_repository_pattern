@@ -29,8 +29,8 @@ class QuotePagedGridView extends StatelessWidget {
         horizontal: theme.screenMargin,
       ),
       // For a deep dive on how the pagination works, refer to: https://www.raywenderlich.com/14214369-infinite-scrolling-pagination-in-flutter
-      child: PagedMasonryGridView.count(
-        pagingController: pagingController,
+      child: PagedMasonryGridView.count(  /// /////////////인디케이터 누르면, 여기로 나오는데 값이 없으면 인디케이터가 나오게 지원을 하는건가??
+        pagingController: pagingController, /// /////++ 어뜨케 로그인 여부 체크하는지.
         builderDelegate: PagedChildBuilderDelegate<Quote>(
           itemBuilder: (context, quote, index) {
             final isFavorite = quote.isFavorite ?? false;

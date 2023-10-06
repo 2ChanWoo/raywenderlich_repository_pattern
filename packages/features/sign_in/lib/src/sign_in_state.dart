@@ -31,6 +31,7 @@ class SignInState extends Equatable {
       ];
 }
 
+
 enum SubmissionStatus {
   /// Used when the form has not been sent yet.
   idle,
