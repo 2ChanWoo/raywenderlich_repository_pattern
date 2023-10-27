@@ -1,6 +1,6 @@
 import 'package:component_library/component_library.dart';
 import 'package:domain_models/domain_models.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide SearchBar;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:monitoring/monitoring.dart';

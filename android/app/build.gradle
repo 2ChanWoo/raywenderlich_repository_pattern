@@ -28,7 +28,7 @@ apply plugin: 'com.google.firebase.crashlytics'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 33
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -49,6 +49,7 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+    namespace 'com.raywenderlich.wonder_words'
 }
 
 flutter {
